@@ -4,8 +4,6 @@ import com.github.bhlangonijr.chesslib.Board;
 import com.github.bhlangonijr.chesslib.Piece;
 import com.github.bhlangonijr.chesslib.Square;
 import com.github.bhlangonijr.chesslib.move.Move;
-import org.checkerframework.checker.units.qual.A;
-import org.kchandra423.Encoder;
 import processing.core.PApplet;
 import processing.core.PImage;
 
@@ -16,23 +14,22 @@ import java.util.HashMap;
 import java.util.List;
 
 public class ChessBoard extends PApplet {
+    private ActionListener moveListener;
+
     private Square squareSelected;
     private final HashMap<Piece, PImage> images;
     private Board board;
 
+    private boolean myTurn;
+
+    private boolean isClient;
+
 
     public ChessBoard(ActionListener a, boolean isClient) {
-        try {
-            FileInputStream fin = new FileInputStream("data/starting_pos.dat");
-            ObjectInputStream ois = new ObjectInputStream(fin);
-            Object boardObject = ois.readObject();
-            ois.close();
-            board = Encoder.decodeDefault(boardObject);
-        } catch (Exception e) {
-            resetBoard();
-            board = new Board();
-            System.out.println("Error loading board!");
-        }
+        board = new Board();
+        this.isClient = isClient;
+        myTurn = isClient;
+        this.moveListener = a;
         images = new HashMap<>();
         squareSelected = Square.NONE;
     }
@@ -74,15 +71,17 @@ public class ChessBoard extends PApplet {
             System.out.println("Insufficient material!");
             exit();
         }
-
         for (int i = 0; i < 64; i++) {
             int row = i / 8;
             int column = i % 8;
             if ((row + column) % 2 == 0) {
                 fill(255);
             } else {
-                fill(166, 94, 46);
-
+                if (isClient) {
+                    fill(128, 0, 128);
+                } else {
+                    fill(166, 94, 46);
+                }
             }
             if (!squareSelected.equals(Square.NONE)) {
                 int selected_column = squareSelected.getFile().getNotation().charAt(0) - 'A';
@@ -115,7 +114,11 @@ public class ChessBoard extends PApplet {
             List<Move> legal_moves = board.legalMoves();
             for (Move move : legal_moves) {
                 if (move.getFrom().equals(squareSelected) && move.getTo().equals(position)) {
-                    board.doMove(move);
+                    if (moveListener != null && myTurn) {
+                        board.doMove(move);
+                        moveListener.actionPerformed(new ActionEvent(this, this.hashCode(), board.getFen()));
+                        myTurn = false;
+                    }
                     squareSelected = Square.NONE;
                     return;
                 }
@@ -125,19 +128,6 @@ public class ChessBoard extends PApplet {
         }
     }
 
-
-    @Override
-    public void keyPressed() {
-        if (key == 's') {
-            System.out.println("Saving board...");
-            saveBoard(board);
-            System.out.println("Board saved!");
-        } else if (key == 'r') {
-            System.out.println("Resetting board...");
-            resetBoard();
-            System.out.println("Board reset!");
-        }
-    }
 
 
     private Square getSquare(int row, int column) {
@@ -153,25 +143,15 @@ public class ChessBoard extends PApplet {
         return getSquare(row, column);
     }
 
-    private static void saveBoard(Board board) {
-        Object boardObject = Encoder.getDefaultEncoding(board);
-        FileOutputStream fout = null;
-        try {
-            fout = new FileOutputStream("data/starting_pos.dat");
-            ObjectOutputStream oos = new ObjectOutputStream(fout);
-            oos.writeObject(boardObject);
-            oos.close();
-        } catch (IOException e) {
-            System.out.println("Error saving board!");
 
+
+    public void setBoard(Object fen){
+        if (!myTurn && fen instanceof String){
+            String fe = (String) fen;
+            board.loadFromFen(fe);
+            myTurn = true;
         }
     }
-
-    private static void resetBoard() {
-        saveBoard(new Board());
-    }
-
-
 }
 
 
