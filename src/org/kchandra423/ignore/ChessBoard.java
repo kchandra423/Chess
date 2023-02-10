@@ -4,12 +4,12 @@ import com.github.bhlangonijr.chesslib.Board;
 import com.github.bhlangonijr.chesslib.Piece;
 import com.github.bhlangonijr.chesslib.Square;
 import com.github.bhlangonijr.chesslib.move.Move;
-import org.checkerframework.checker.units.qual.A;
 import org.kchandra423.Encoder;
+import org.kchandra423.engine.Engine;
+import org.kchandra423.engine.Evaluator;
 import processing.core.PApplet;
 import processing.core.PImage;
 
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.*;
 import java.util.HashMap;
@@ -57,6 +57,7 @@ public class ChessBoard extends PApplet {
     @Override
     public void draw() {
         background(0);
+
         if (board.isMated()) {
             System.out.println("Checkmate!");
             System.out.println("Winner: " + board.getSideToMove().flip().toString());
@@ -101,6 +102,11 @@ public class ChessBoard extends PApplet {
             image(images.get(cur), column * 100, row * 100, 100, 100);
 
         }
+        textSize(32);
+        fill(255,0,0);
+        text("Turn: " + board.getSideToMove().toString(), 0, 40);
+        text("Move: " + board.getMoveCounter(), 0, 80);
+        text("Evaluation: " + Evaluator.evaluate(board), 0, 120);
     }
 
     @Override
@@ -116,6 +122,12 @@ public class ChessBoard extends PApplet {
             for (Move move : legal_moves) {
                 if (move.getFrom().equals(squareSelected) && move.getTo().equals(position)) {
                     board.doMove(move);
+                    Move bestMove = Engine.getBestMove(board, 2);
+                    if (bestMove == null) {
+                        System.out.println("No legal moves!");
+                        return;
+                    }
+                    board.doMove(bestMove);
                     squareSelected = Square.NONE;
                     return;
                 }

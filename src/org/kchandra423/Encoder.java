@@ -1,15 +1,10 @@
 package org.kchandra423;
 
 import com.github.bhlangonijr.chesslib.Board;
-import org.kchandra423.ignore.TesterHelper;
 
 import java.io.IOException;
 
 public class Encoder {
-
-    public static void main(String[] args) throws IOException {
-        TesterHelper.checkBoards();
-    }
 
 
     public static Object getDefaultEncoding(Board b) {
