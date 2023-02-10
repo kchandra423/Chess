@@ -122,7 +122,7 @@ public class ChessBoard extends PApplet {
             for (Move move : legal_moves) {
                 if (move.getFrom().equals(squareSelected) && move.getTo().equals(position)) {
                     board.doMove(move);
-                    Move bestMove = Engine.getBestMove(board, 2);
+                    Move bestMove = Engine.getBestMove(board, 4);
                     if (bestMove == null) {
                         System.out.println("No legal moves!");
                         return;

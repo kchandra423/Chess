@@ -91,10 +91,10 @@ public class Evaluator {
         if (board.isMated()) {
             return board.getSideToMove() == Side.WHITE ? Integer.MIN_VALUE : Integer.MAX_VALUE;
         }
-        int materialSide = materialEval(board, board.getSideToMove());
-        int materialOther = materialEval(board, board.getSideToMove().flip());
-        int material = materialSide - materialOther;
-        int position = positionEval(board, board.getSideToMove(), materialSide) - positionEval(board, board.getSideToMove().flip(), materialOther);
+        int materialWhite = materialEval(board, Side.WHITE);
+        int materialBlack = materialEval(board, Side.WHITE.flip());
+        int material = materialWhite - materialBlack;
+        int position = positionEval(board, Side.WHITE, materialWhite) - positionEval(board, Side.WHITE.flip(), materialBlack);
         return material + position;
     }
 
