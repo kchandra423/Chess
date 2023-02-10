@@ -1,27 +1,22 @@
-import com.github.bhlangonijr.chesslib.Bitboard;
+package org.kchandra423;
+
 import com.github.bhlangonijr.chesslib.Board;
-import com.github.bhlangonijr.chesslib.Piece;
-import com.github.bhlangonijr.chesslib.Square;
+import org.kchandra423.ignore.TesterHelper;
 
-import java.util.List;
-import java.io.File;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Scanner;
 
-public class Tester {
-//    private static final MemoryCounter mc = new MemoryCounter();
+public class Encoder {
 
     public static void main(String[] args) throws IOException {
         TesterHelper.checkBoards();
-
     }
 
-    static Object getDefaultEncoding(Board b) {
+
+    public static Object getDefaultEncoding(Board b) {
         return getEncodingFEN(b);
     }
 
-    static Board decodeDefault(Object o) {
+    public static Board decodeDefault(Object o) {
         return decodeFEN(o);
     }
 
@@ -106,7 +101,6 @@ public class Tester {
 //        return b.getFen();
 
 
-
 //    ############### DECODE METHODS ###############
 //        Method 1: Strings
 //        b.clear();
@@ -136,9 +130,6 @@ public class Tester {
 
 //        Method 3: Use FEN
 //        b.loadFromFen((String) o);
-
-
-
 
 
 }

@@ -1,12 +1,15 @@
+package org.kchandra423.ignore;
+
 import com.github.bhlangonijr.chesslib.Board;
 import com.github.bhlangonijr.chesslib.Piece;
+import org.kchandra423.Encoder;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.Scanner;
 
 public class TesterHelper {
-    static void checkBoards() throws IOException {
+    public static void checkBoards() throws IOException {
         File boardFile = new File("data/small.fen");
         Scanner reader = new Scanner(boardFile);
         int num = 0;
@@ -14,10 +17,10 @@ public class TesterHelper {
         while (reader.hasNextLine()) {
             Board b = new Board();
             b.loadFromFen(reader.nextLine());
-            Object encoding = Tester.getDefaultEncoding(b);
+            Object encoding = Encoder.getDefaultEncoding(b);
             total_size += checkMemorySize(encoding);
             num++;
-            Board newBoard = Tester.decodeDefault(encoding);
+            Board newBoard = Encoder.decodeDefault(encoding);
             if (!boardEquals(b, newBoard)) {
                 throw new RuntimeException("Boards not equal");
             }
