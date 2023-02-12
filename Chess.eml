@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component inherit-compiler-output="true" inheritJdk="true">
+	<output-test url="file://$MODULE_DIR$/out/test/Chess"/>
+	<exclude-output/>
+	<contentEntry url="file://$MODULE_DIR$"/>
+	<lib name="libs" scope="COMPILE">
+		<srcroot url="file://$MODULE_DIR$/libs"/>
+		<relative-module-src project-related="file://$PROJECT_DIR$/libs"/>
+		<relative-module-cls project-related="file://$PROJECT_DIR$/libs"/>
+	</lib>
+</component>
