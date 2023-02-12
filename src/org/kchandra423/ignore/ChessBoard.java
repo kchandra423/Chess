@@ -4,13 +4,10 @@ import com.github.bhlangonijr.chesslib.Board;
 import com.github.bhlangonijr.chesslib.Piece;
 import com.github.bhlangonijr.chesslib.Square;
 import com.github.bhlangonijr.chesslib.move.Move;
-import org.checkerframework.checker.units.qual.A;
 import org.kchandra423.Encoder;
 import processing.core.PApplet;
 import processing.core.PImage;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.*;
 import java.util.HashMap;
 import java.util.List;
@@ -21,8 +18,11 @@ public class ChessBoard extends PApplet {
     private Board board;
 
 
-    public ChessBoard(ActionListener a, boolean isClient) {
+    public ChessBoard() {
         try {
+            if (!new File("data/starting_pos.dat").exists()) {
+                throw new FileNotFoundException();
+            }
             FileInputStream fin = new FileInputStream("data/starting_pos.dat");
             ObjectInputStream ois = new ObjectInputStream(fin);
             Object boardObject = ois.readObject();
