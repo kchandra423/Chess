@@ -1,0 +1,25 @@
+<component name="libraryTable">
+  <library name="libs">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/libs/guava-31.1-jre.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libs/guava-gwt-31.1-jre.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libs/chesslib-1.3.3.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libs/failureaccess-1.0.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libs/kryo-5.3.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libs/core-3.3.7.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libs/j2objc-annotations-1.3.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libs/listenablefuture-9999.0-empty-to-avoid-conflict-with-guava.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libs/elemental2-promise-1.1.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libs/jsr305-3.0.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libs/kryonet-all-2.21.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libs/jsonbeans-0.7.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libs/checker-qual-3.12.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libs/error_prone_annotations-2.11.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libs/jsinterop-annotations-2.0.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libs/base-1.0.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libs/core.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

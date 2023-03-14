@@ -85,6 +85,9 @@ public class Evaluator {
 
 
     public static int evaluate(Board board) {
+        if (board.isMated()) {
+            return board.getSideToMove() == Side.WHITE ? Integer.MIN_VALUE : Integer.MAX_VALUE;
+        }
         int materialWhite = materialEval(board, Side.WHITE);
         int materialBlack = materialEval(board, Side.BLACK);
         int material = materialWhite - materialBlack;
